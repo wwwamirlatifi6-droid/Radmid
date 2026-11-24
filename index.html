@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>رادمود رادیاتور | RadMod Radiator</title>
+  <style>
+    @font-face {
+      font-family: 'AriaFaNum';
+      src: url('./AriaWebFaNum-Light.woff2') format('woff2');
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'AriaFaNum';
+      src: url('./AriaWebFaNum-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'AriaFaNum';
+      src: url('./AriaWebFaNum-Medium.woff2') format('woff2');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'AriaFaNum';
+      src: url('./AriaWebFaNum-SemiBold.woff2') format('woff2');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'AriaFaNum';
+      src: url('./AriaWebFaNum-Bold.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'AriaFaNum';
+      src: url('./AriaWebFaNum-ExtraBold.woff2') format('woff2');
+      font-weight: 800;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root,
+    [data-theme="dark"] {
+      --bg: #090b0f;
+      --hdr-bg: rgba(9, 11, 15, 0.82);
+      --surface: #12151d;
+      --surface-2: #181c27;
+      --ink: #f6f7f9;
+      --ink-sub: #c2c9d6;
+      --muted: #848da0;
+      --line: rgba(255, 255, 255, 0.08);
+      --line-strong: rgba(255, 255, 255, 0.14);
+      --accent: #d4a84f;
+      --accent-soft: rgba(212, 168, 79, 0.14);
+      --on-accent: #090b0f;
+    }
+
+    [data-theme="light"] {
+      --bg: #f6f6f4;
+      --hdr-bg: rgba(255, 255, 255, 0.86);
+      --surface: #ffffff;
+      --surface-2: #efeee9;
+      --ink: #11141a;
+      --ink-sub: #3b4252;
+      --muted: #697284;
+      --line: rgba(17, 20, 26, 0.08);
+      --line-strong: rgba(17, 20, 26, 0.15);
+      --accent: #a67a26;
+      --accent-soft: rgba(166, 122, 38, 0.11);
+      --on-accent: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'AriaFaNum', Tahoma, sans-serif;
+    }
+
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font-family: 'AriaFaNum', Tahoma, sans-serif; }
+
+    .container {
+      width: 100%;
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* هدر مدرن مینیمال با لبه‌های نرم‌تر و شفافیت شیشه‌ای */
+    .hdr {
+      width: 100%;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--hdr-bg);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+      transition: background-color 0.25s ease, border-color 0.25s ease;
+    }
+
+    .hdr-inner {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 10px 0;
+    }
+
+    /* برند رادمود رادیاتور در سمت راست */
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      border: 1px solid var(--line-strong);
+      background: var(--accent-soft);
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-size: 17.5px;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.25;
+    }
+
+    .brand-title span {
+      color: var(--accent);
+    }
+
+    .brand-sub {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+    /* منوی ناوبری مدرن */
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 4px;
+    }
+
+    .nav a {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-sub);
+      padding: 7px 15px;
+      border-radius: 999px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .nav a:hover {
+      color: var(--ink);
+      background: var(--surface-2);
+    }
+
+    .nav a.active {
+      background: var(--accent);
+      color: var(--on-accent);
+      font-weight: 700;
+    }
+
+    /* کنترل‌های مدرن سمت چپ */
+    .hdr-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .lang-pills {
+      display: inline-flex;
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .lang-pills button {
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 9px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .lang-pills button.active {
+      background: var(--accent);
+      color: var(--on-accent);
+    }
+
+    .theme-pills {
+      display: inline-flex;
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .theme-pills button {
+      width: 28px;
+      height: 26px;
+      border: none;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .theme-pills button.active {
+      background: var(--accent);
+      color: var(--on-accent);
+    }
+
+    .inquiry-chip {
+      height: 34px;
+      padding: 0 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line-strong);
+      background: var(--surface);
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .inquiry-chip:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .inquiry-chip .num {
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 1px 7px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    /* فضای موقت گام اول */
+    .step-stage {
+      min-height: calc(100vh - 75px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+    }
+
+    .step-card {
+      width: 100%;
+      max-width: 600px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 32px;
+    }
+
+    .step-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+
+    .step-card h1 {
+      font-size: 19px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .step-card p {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    @media (max-width: 1120px) {
+      .nav {
+        gap: 2px;
+      }
+      .nav a {
+        padding: 7px 11px;
+        font-size: 12.5px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hdr-inner {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .nav {
+        order: 3;
+        width: 100%;
+        border-radius: 14px;
+        overflow-x: auto;
+        justify-content: flex-start;
+      }
+      .inquiry-chip .txt {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hdr">
+    <div class="container hdr-inner">
+      <!-- برند رادمود رادیاتور در سمت راست -->
+      <a href="#home" class="brand">
+        <div class="brand-mark">RM</div>
+        <div class="brand-text">
+          <span class="brand-title" data-i18n="brand"><span>رادمود</span> رادیاتور</span>
+          <span class="brand-sub">RADMOD RADIATOR</span>
+        </div>
+      </a>
+
+      <!-- منوی مدرن کپسولی -->
+      <nav class="nav" aria-label="Main Navigation">
+        <a href="#home" class="active" data-i18n="home">خانه</a>
+        <a href="#products" data-i18n="products">محصولات</a>
+        <a href="#projects" data-i18n="projects">پروژه‌ها</a>
+        <a href="#catalogs" data-i18n="catalogs">کاتالوگ</a>
+        <a href="#about" data-i18n="about">درباره ما</a>
+        <a href="#contact" data-i18n="contact">تماس با ما</a>
+      </nav>
+
+      <!-- کنترل‌های سمت چپ: ۳ زبان + تغییر تم + استعلام -->
+      <div class="hdr-actions">
+        <div class="lang-pills" role="group" aria-label="Language">
+          <button type="button" class="active" data-lang="fa" onclick="switchLang('fa')">FA</button>
+          <button type="button" data-lang="en" onclick="switchLang('en')">EN</button>
+          <button type="button" data-lang="ar" onclick="switchLang('ar')">AR</button>
+        </div>
+
+        <div class="theme-pills" role="group" aria-label="Theme">
+          <button type="button" class="active" id="tDark" onclick="switchTheme('dark')" title="Dark" aria-label="Dark">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </button>
+          <button type="button" id="tLight" onclick="switchTheme('light')" title="Light" aria-label="Light">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="4"/>
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+            </svg>
+          </button>
+        </div>
+
+        <a href="#inquiry" class="inquiry-chip">
+          <span class="txt" data-i18n="inquiry">استعلام</span>
+          <span class="num" data-i18n="count">۰</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="home" class="step-stage">
+    <div class="step-card">
+      <span class="step-badge">STEP 01 — MODERN HEADER</span>
+      <h1 data-i18n="title">هدر مدرن، روان و بدون شلوغی رادمود رادیاتور</h1>
+      <p data-i18n="desc">
+        استایل به شکل مدرن‌تر و امروزی‌تر به‌روزرسانی شد؛ تغییر واقعی زبان بین FA / EN / AR و تغییر تم تیره/روشن فعال است. اگر هدر اوکی است، بگو قدم بعدی (بخش هیرو / بنر اول) چطور باشد.
+      </p>
+    </div>
+  </main>
+
+  <script>
+    const dict = {
+      fa: {
+        dir: "rtl",
+        brand: "<span>رادمود</span> رادیاتور",
+        home: "خانه",
+        products: "محصولات",
+        projects: "پروژه‌ها",
+        catalogs: "کاتالوگ",
+        about: "درباره ما",
+        contact: "تماس با ما",
+        inquiry: "استعلام",
+        count: "۰",
+        title: "هدر مدرن، روان و بدون شلوغی رادمود رادیاتور",
+        desc: "استایل به شکل مدرن‌تر و امروزی‌تر به‌روزرسانی شد؛ تغییر واقعی زبان بین FA / EN / AR و تغییر تم تیره/روشن فعال است. اگر هدر اوکی است، بگو قدم بعدی (بخش هیرو / بنر اول) چطور باشد."
+      },
+      en: {
+        dir: "ltr",
+        brand: "<span>RADMOD</span> RADIATOR",
+        home: "Home",
+        products: "Products",
+        projects: "Projects",
+        catalogs: "Catalogs",
+        about: "About",
+        contact: "Contact",
+        inquiry: "Inquiry",
+        count: "0",
+        title: "Modern Header for RadMod Radiator",
+        desc: "Refreshed with a cleaner contemporary look, working FA / EN / AR language switch, and Dark / Light theme toggle. Let me know what you want for the next step."
+      },
+      ar: {
+        dir: "rtl",
+        brand: "<span>رادمود</span> للمشعات",
+        home: "الرئيسية",
+        products: "المنتجات",
+        projects: "المشاريع",
+        catalogs: "الكتالوج",
+        about: "من نحن",
+        contact: "اتصل بنا",
+        inquiry: "استعلام",
+        count: "٠",
+        title: "رأس صفحة عصري وأنيق لرادمود للمشعات",
+        desc: "تم تحديث التصميم بأسلوب حديث وانسيابي مع تبديل فعلي بين اللغات الثلاث FA / EN / AR وتبديل المظهر الداكن والفاتح. أخبرني بالخطوة التالية."
+      }
+    };
+
+    function switchLang(lang) {
+      const d = dict[lang] || dict.fa;
+      document.documentElement.lang = lang;
+      document.documentElement.dir = d.dir;
+      document.querySelectorAll(".lang-pills button").forEach(b => {
+        b.classList.toggle("active", b.dataset.lang === lang);
+      });
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const k = el.getAttribute("data-i18n");
+        if (d[k] !== undefined) el.innerHTML = d[k];
+      });
+    }
+
+    function switchTheme(mode) {
+      document.documentElement.setAttribute("data-theme", mode);
+      document.getElementById("tDark").classList.toggle("active", mode === "dark");
+      document.getElementById("tLight").classList.toggle("active", mode === "light");
+    }
+  </script>
+</body>
+</html>
